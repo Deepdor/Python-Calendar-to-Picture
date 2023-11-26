@@ -9,10 +9,13 @@ current_year = datetime.now().year
 current_month = datetime.now().month
 
 # Generate a calendar for the current month
-cal = calendar.Calendar(firstweekday=calendar.SUNDAY)
+cal = calendar.Calendar(firstweekday=calendar.MONDAY)
 
 # Create a list of weeks for the month
 month_days = cal.monthdayscalendar(current_year, current_month)
+# Modify the month_days to replace zeros with empty space
+month_days = [[day if day != 0 else ' ' for day in week] for week in month_days]
+
 
 # Plot the calendar grid
 fig, ax = plt.subplots(figsize=(10, 1))  # Aspect ratio 10:1 to fit the bottom of the portrait image
@@ -37,7 +40,7 @@ table.set_fontsize(10)
 table.scale(1, 1.5)  # Scale the height to make cells more rectangular
 
 # Save the calendar grid image
-calendar_grid_path = 'C:/outp/calendar_grid.png'
+calendar_grid_path = 'calendar_grid.png'
 fig.savefig(calendar_grid_path, transparent=True, bbox_inches='tight', pad_inches=0)
 
 calendar_grid_path
